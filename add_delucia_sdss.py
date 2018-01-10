@@ -13,7 +13,7 @@ def wget_from_virgodb(username, password, sql_query, save_name='virgodb_result.c
     return
     
   if not os.path.exists(save_dir+'cookie.txt'):
-    os.system('touch {0}/cookie.txt'+save_dir)
+    os.system('touch {0}/cookie.txt'.format(save_dir))
   
   cmd = 'wget --http-user={0} --http-passwd={1} \
          --cookies=on --keep-session-cookies --save-cookies=cookie.txt --load-cookies=cookie.txt \
@@ -50,7 +50,7 @@ if __name__=='__main__':
                    dl.redshift between 0.35 and 3.06 and \
                    dl.galaxyID = sdss.galaxyID'
   
-  wget_from_virgodb('myname', 'mypass', delu_sdss_sql, save_name='delucia2006a_sdss2mass.csv')
+  wget_from_virgodb('mypass', 'myname', delu_sdss_sql, save_name='delucia2006a_sdss2mass.csv.part')
   
-  s3sax_with_sdss = add_columns_to_s3sax('updated_contcut_galaxies_line.h5', 'delucia2006a_sdss2mass.csv', mode='merge')
+  s3sax_with_sdss = add_columns_to_s3sax('updated_contcut_galaxies_line.h5', 'delucia2006a_sdss2mass.csv.part', mode='merge')
   s3sax_with_sdss.to_hdf('s3sax_delucia2006a_sdss2mass.h5', key='table')
