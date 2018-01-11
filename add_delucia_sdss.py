@@ -50,7 +50,7 @@ if __name__=='__main__':
                    dl.redshift between 0.35 and 3.06 and \
                    dl.galaxyID = sdss.galaxyID'
   
-  wget_from_virgodb('mypass', 'myname', delu_sdss_sql, save_name='delucia2006a_sdss2mass.csv.part')
+  wget_from_virgodb('mypass', 'myname', delu_sdss_sql, save_name='delucia2006a_sdss2mass.csv')
   
-  s3sax_with_sdss = add_columns_to_s3sax('updated_contcut_galaxies_line.h5', 'delucia2006a_sdss2mass.csv.part', mode='merge')
+  s3sax_with_sdss = add_columns_to_s3sax('updated_contcut_galaxies_line.h5', 'delucia2006a_sdss2mass.csv', mode='merge')
   s3sax_with_sdss.to_hdf('s3sax_delucia2006a_sdss2mass.h5', key='table')
